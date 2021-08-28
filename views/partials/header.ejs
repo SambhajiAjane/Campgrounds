@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+	<html>
+		<head>
+		<title>Campgrounds</title>
+		<link rel="stylesheet" type="text/css" href="/stylesheets/style.css">
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+	
+		</head>
+	<body>	
+	<nav class="navbar navbar-expand-lg navbar-light bg-light">
+		<div class="container-fluid">
+			<a class="navbar-brand" href="/">Campgrounds</a>
+			<form class="form-inline my-2 my-lg-0">
+				<div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="nav navbar-nav navbar-right">
+		<% if(!currentUser){ %>
+		<li class="nav-item"><a class="nav-link" href="/login">Login</a></li>
+		<li class="nav-item"><a class="nav-link" href="/register">Sign Up</a></li>
+		<% } else{ %>
+		<li class="nav-item"><a class="nav-link" href="#">Signed in as <%=currentUser.username%></a></li>
+		<li class="nav-item"><a class="nav-link" href="/logout">Logout</a></li>
+		<% } %>
+				</ul>
+			</div>
+			</form>
+			
+		</div>
+		</nav>
+		<div class="container">
+			<%if(error && error.length>0){%>
+			<div class="alert alert-primary" role="alert">
+				<%= error%>
+			</div>
+			<%}%>
+			<%if(success && (success.length)>0){%>
+			<div class="alert alert-secondary" role="alert">
+				<%= success%>
+			</div>
+			<%}%>
+		</div>
+		

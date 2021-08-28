@@ -1,0 +1,55 @@
+<%- include('../partials/header'); -%>
+<div class="container">
+	<div class="row">
+		<div class="col-md-3">
+			<p class="lead">Yelpcamp</p>
+			<div class="list-group">
+				<li class="list-group-item active">Info1</li>
+				<li class="list-group-item">Info1</li>
+				<li class="list-group-item">Info1</li>
+			</div>
+		</div>
+		<div class="col-md-9">
+			<div class="img-thumbnail">
+				<img class="img-responsive" style="width:100%;" src="<%=id.img%>">
+				<div class="figure-caption "><br>
+					<h4><a><%=id.name%></a></h4>
+					<p>
+						<em>Submited by <%=id.author.userName%></em>
+					</p>
+			
+					<p><%=id.discription%></p>
+					<% if(currentUser && currentUser._id.equals(id.author.id)){ %>
+					<div class="thumbnail">
+						<a class="btn btn-primary" href="/camps/<%=id._id%>/edit">Edit</a>
+						<form style="display:inline" action="/camps/<%=id._id%>?_method=DELETE" method = "POST">
+							<button style="display:inline;" class="btn btn-danger">Delete</button>
+						</form>
+						
+					</div>
+					<%}%>
+				</div>
+			</div>
+			<div class="card">
+				<div>
+					<p class="card-text text-right">
+						<a class="btn btn-success" href="/camps/<%=id._id%>/comments/new">Add new comment</a>
+					</p>
+					<% id.comments.forEach(function(comment){%>
+					<p class="card-text">
+					<div><strong><%=comment.author.userName%></strong><br><%=comment.text%></div>
+					<% if(currentUser && currentUser._id.equals(comment.author.id)){ %>
+						<a class="btn btn-xs btn-primary" href="/camps/<%=id._id%>/comments/<%=comment.id%>/edit">Edit</a>
+						<form style="display:inline" action="/camps/<%=id._id%>/comments/<%=comment.id%>?_method=DELETE" method = "POST">
+							<button style="display:inline;" class="btn btn-danger">Delete</button><%}%>
+						</form></p>
+					<%})%>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+<%- include("../partials/footer") -%>
